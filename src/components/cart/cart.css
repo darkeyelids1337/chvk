@@ -1,0 +1,94 @@
+@keyframes myAnim {
+	0% {
+		animation-timing-function: ease-in;
+		opacity: 1;
+		transform: translateY(-80px);
+	}
+
+	24% {
+		opacity: 1;
+	}
+
+	40% {
+		animation-timing-function: ease-in;
+		transform: translateY(-24px);
+	}
+
+	65% {
+		animation-timing-function: ease-in;
+		transform: translateY(-12px);
+	}
+
+	82% {
+		animation-timing-function: ease-in;
+		transform: translateY(-6px);
+	}
+
+	93% {
+		animation-timing-function: ease-in;
+		transform: translateY(-4px);
+	}
+
+	25%,
+	55%,
+	75%,
+	87% {
+		animation-timing-function: ease-out;
+		transform: translateY(0px);
+	}
+
+	100% {
+		animation-timing-function: ease-out;
+		opacity: 1;
+		transform: translateY(0px);
+	}
+}
+
+
+.cart-container{
+    position: fixed;
+    width: 300px;
+    height: 600px;
+    background-color: white;
+    z-index: 3;
+    right: 50.3px;
+    box-shadow: 0px 5px 10px 11px rgba(34, 60, 80, 0.2) inset;
+    animation: myAnim 1s ease 0s 1 normal forwards;
+}
+.close-icon{
+    position: absolute;
+    right: 10px;
+}
+.close-icon:hover,
+.close-icon:active{
+    background-color: red;
+    cursor: pointer;
+}
+.cart-movies-list .anticon{
+    color: red;
+    cursor: pointer;
+}
+.cart-li{
+    text-align: center;
+    width: 100px;
+    height: 30px;
+    list-style: none;
+    margin-top: 10px;
+    border: 1px black solid;
+    border-radius: 20%;
+}
+.cart-buy-button{
+    padding: 2px;
+    border: none;
+    background-color: #ffdd2d;
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    align-self: center;
+    cursor: pointer;
+    margin-left: 100px;
+}
+.cart-buy-button:hover,
+.cart-buy-button:active{
+    background-color:#ff7a2dc4;
+}

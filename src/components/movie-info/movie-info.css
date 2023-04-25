@@ -7,6 +7,24 @@
     margin-right: 10px;
     padding-bottom: 15px;
 }
+.buy-film-button{
+    padding: 2px;
+    border: none;
+    background-color:#ffdd2d;
+    width: 200px;
+    height: 30px;
+    text-align: center;
+    align-self: center;
+    cursor: pointer;
+    margin-top:10px;
+    margin-right: 0px;
+}
+.buy-film-button:hover{
+    background-color:#ff7a2d;
+}
+.buy-film-button:active{
+    background-color:#ff7a2d;
+}
 .add-review{
     padding: 2px;
     border: none;

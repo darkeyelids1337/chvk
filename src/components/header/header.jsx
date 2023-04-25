@@ -2,9 +2,11 @@ import "./header.css";
 import { Input } from "antd";
 import { ShoppingCartOutlined, PlaySquareOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
+import Cart from "../cart";
 const { Search } = Input;
-const Header = ({ changeTerm }) => {
+const Header = ({ changeTerm, cart, setCart}) => {
   const onSearch = (value) => changeTerm(value.toLowerCase());
+  const [isCartActive, setCartActive] = useState(false);
   const [balance, setBalance] = useState(107);
   const [balanceForm, setBalanceForm] = useState(false);
   useEffect(() => {
@@ -55,7 +57,7 @@ const Header = ({ changeTerm }) => {
             Пополнить баланс
           </button>
         </div>
-        <div className="cart">
+        <div className="cart" onClick={() => setCartActive(!isCartActive)}>
           <ShoppingCartOutlined style={{ fontSize: 30 }}></ShoppingCartOutlined>
         </div>
         <div className="film-list">
@@ -63,6 +65,14 @@ const Header = ({ changeTerm }) => {
         </div>
       </div>
       <BalanceForm></BalanceForm>
+      {isCartActive ? (
+        <Cart
+          cart={cart}
+          setCart={setCart}
+          isCartActive={isCartActive}
+          setCartActive={setCartActive}
+        ></Cart>
+      ) : null}
     </>
   );
 };
