@@ -1,0 +1,92 @@
+.sgn-up-container{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 720px;
+}
+.company-name{
+    font-weight: 600;
+    font-size: 90px;
+    line-height: 55.44px;
+}
+.form-container{
+    margin-top: 60px;
+}
+.company-name h1{
+    text-align: center;
+}
+.user-input{
+    width: 393px;
+    height: 52.79px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    background-color:#D9D9D9;
+    border: none;
+}
+.pass-input{
+    margin-top: 20.21px;
+    width: 393px;
+    height: 52.79px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    background-color:#D9D9D9;
+    border: none;
+}
+input::placeholder{
+    font-size: 20px;
+    line-height: 23.44px;
+    font-weight: 400;
+    color:#000000;
+}
+input{
+    font-size: 20px;
+    padding: 15px 0px 14.79px 22px;
+}
+.register-button{
+    margin-top: 20.21px;
+    background-color: #37C6F3;
+    width: 393px;
+    height: 52.79px;
+    border-radius: 20px;
+    font-size: 25px;
+    text-align: center;
+    color: white;
+    border: none;
+}
+.register-button:active{
+    border: 2px;
+    background: rgb(100,100,100) radial-gradient(circle at 0 0, rgba(255,255,255,.65), rgba(255,255,255,.35));
+}
+.to-log-btn{
+    border: none;
+    margin-top: 10px;
+    margin-left: 12px;
+    color:#6D6D6D;
+    background-color: white;
+}
+.to-log-btn:active{
+    background: rgb(100,100,100) radial-gradient(circle at 0 0, rgba(255,255,255,.65), rgba(255,255,255,.35));
+}
+.pass-confirm-input{
+    margin-top: 20.21px;
+    width: 393px;
+    height: 52.79px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    background-color:#D9D9D9;
+    border: none;
+}
+.email-input{
+    width: 393px;
+    height: 52.79px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    background-color:#D9D9D9;
+    border: none;
+    padding: 17px 0px 12.79px 22px;
+}
+.pass-feedback{
+    color: red;
+    margin-left: 15px;
+}

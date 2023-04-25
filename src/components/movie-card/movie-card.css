@@ -1,0 +1,9 @@
+.card-photo{
+    border-radius: 15%;
+}
+.card-container{
+    margin-right: 60px;
+    margin-top: 60px; 
+    text-align: center;
+    cursor: pointer;
+}

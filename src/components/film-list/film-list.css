@@ -1,0 +1,6 @@
+.film-list-container{
+    width: 85%;
+    position: static;
+    /* align-self: center; */
+    margin-left: 40px;
+}
