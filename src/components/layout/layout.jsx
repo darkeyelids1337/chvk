@@ -4,14 +4,14 @@ import Header from "../header";
 import FilmList from "../film-list";
 import MovieInfo from "../movie-info";
 import { useEffect, useState } from "react";
-const Layout = ({data, changeTerm, isCritic}) => {
+const Layout = ({data, changeTerm, isCritic, cart, setCart}) => {
   const [movieInfo, setMovieInfo] = useState();
   return (
     <>
-      <Header changeTerm={changeTerm}></Header>
+      <Header changeTerm={changeTerm} cart={cart} setCart={setCart}></Header>
       <div className="main-page">
         <FilmList data = {data} setMovieInfo = {setMovieInfo}></FilmList>
-        {movieInfo ? <MovieInfo props = {movieInfo} isCritic={isCritic}></MovieInfo> : null}
+        {movieInfo ? <MovieInfo props = {movieInfo} isCritic={isCritic} setCart={setCart} cart={cart}></MovieInfo> : null}
       </div>
     </>
   );

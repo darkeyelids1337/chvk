@@ -1,6 +1,6 @@
 import './movie-info.css';
 
-const MovieInfo = ({props, isCritic}) => {
+const MovieInfo = ({props, isCritic, setCart, cart}) => {
     const {posterUrl, title, year, director, genres, actors, plot, reviews} = props;
     const actorsArray = actors.split(',');
     const AddReviewButton = () => {
@@ -48,7 +48,13 @@ const MovieInfo = ({props, isCritic}) => {
                         {actorsArray.map((item, index) => {
                             return <li key={item}>{item}</li>;
                         })}
+                        <button className='buy-film-button' onClick={() => {
+                            setCart([...cart, props]);
+                        }
+                            
+                            }>Купить фильм</button>
                     </ul>
+                    
                 </div>
             </div>
         </div>
