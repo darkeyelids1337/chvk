@@ -1,0 +1,77 @@
+.header-container{
+    display: grid;
+    grid-template-columns: min-content 1fr min-content min-content min-content;
+    padding-top:14px;
+}
+.search-bar{
+    justify-self: center;
+    padding-top: 10px;
+    width: 300px;
+}
+.header-name{ 
+    margin-left: 33%;
+    font-weight: 600;
+    font-size: 35px;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 10px;
+}
+.cart{
+    padding-top: 10px;
+    color: black;
+    padding-right: 55px;
+}
+.cart:hover,
+.cart:active{
+    transition: 0.1s;
+    color:blue;
+}
+.film-list{
+    padding-top: 10px;
+    padding-right: 55px;
+    color:black;
+}
+.film-list:hover,
+.film-list:active{
+    transition: 0.1s;
+    color:blue;
+}
+.balance{
+    align-self: center;
+    text-align: center;
+    padding-right: 55px;
+    width: 125px;
+}
+.balance-button{
+    padding: 2px;
+    border: none;
+    background-color: #ffdd2d;
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    align-self: center;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.balance-button:hover,
+.balance-button:active{
+    background-color:#ff7a2dc4;
+}
+.visually-hidden:not(:focus):not(:active) {	
+    border: 0;	clip: rect(0 0 0 0); 	clip-path: inset(50%);	height: 1px;	margin: -1px;	overflow: hidden;	padding: 0;	position: absolute;	white-space: nowrap; 	width: 1px;
+}
+.balance-form{
+    text-align: center;
+    padding: 30px;
+    background-color: white;
+    position: fixed;
+    width: 500px;
+    height: 300px;
+    left: 35%;
+    top:15%;
+    z-index: 100;
+    box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+}
+.balance-form button{
+    margin-left:10px;
+}
