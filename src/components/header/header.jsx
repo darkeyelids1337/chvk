@@ -1,14 +1,16 @@
 import "./header.css";
 import { Input } from "antd";
-import { ShoppingCartOutlined, PlaySquareOutlined } from "@ant-design/icons";
+import { ShoppingCartOutlined, PlaySquareOutlined, CloseOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import Cart from "../cart";
+import Catalog from "../catalog";
 const { Search } = Input;
-const Header = ({ changeTerm, cart, setCart}) => {
+const Header = ({ changeTerm, cart, setCart, catalogData, setCatalogData}) => {
   const onSearch = (value) => changeTerm(value.toLowerCase());
   const [isCartActive, setCartActive] = useState(false);
   const [balance, setBalance] = useState(107);
   const [balanceForm, setBalanceForm] = useState(false);
+  const [isCatalogActive, setCatalogActive] = useState(false);
   useEffect(() => {
     if (balanceForm) {
       document
@@ -19,6 +21,9 @@ const Header = ({ changeTerm, cart, setCart}) => {
   const BalanceForm = () => {
     return (
       <div className="balance-form visually-hidden">
+        <div className="close-icon" onClick={() => setBalanceForm(!balanceForm)}>
+            <CloseOutlined />
+          </div>
         <h3>Пожалуйста введите насколько вы хотите пополнить</h3>
         <input type="number"></input>
         <button
@@ -60,7 +65,10 @@ const Header = ({ changeTerm, cart, setCart}) => {
         <div className="cart" onClick={() => setCartActive(!isCartActive)}>
           <ShoppingCartOutlined style={{ fontSize: 30 }}></ShoppingCartOutlined>
         </div>
-        <div className="film-list">
+        <div
+          className="film-list"
+          onClick={() => setCatalogActive(!isCatalogActive)}
+        >
           <PlaySquareOutlined style={{ fontSize: 30 }}></PlaySquareOutlined>
         </div>
       </div>
@@ -71,7 +79,17 @@ const Header = ({ changeTerm, cart, setCart}) => {
           setCart={setCart}
           isCartActive={isCartActive}
           setCartActive={setCartActive}
+          catalogData ={catalogData}
+          setCatalogData={setCatalogData}
         ></Cart>
+      ) : null}
+      {isCatalogActive ? (
+        <Catalog
+          isCatalogActive={isCatalogActive}
+          setCatalogActive={setCatalogActive}
+          catalogData={catalogData}
+          setCatalogData={setCatalogData}
+        ></Catalog>
       ) : null}
     </>
   );

@@ -139,6 +139,7 @@ const App = () => {
     },
   ]);
   const [cart, setCart] = useState([]);
+  const [catalogData, setCatalogData] = useState([]);
   useEffect(() => {
     const userInfo = localStorage.getItem("user");
     if (userInfo) {
@@ -175,6 +176,8 @@ const App = () => {
               isCritic={isCritic}
               cart={cart}
               setCart={setCart}
+              catalogData={catalogData}
+              setCatalogData={setCatalogData}
             ></Layout>
           }
         ></Route>

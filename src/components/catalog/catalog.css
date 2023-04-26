@@ -1,0 +1,39 @@
+.catalog-container{
+    position: fixed;
+    width: 300px;
+    height: 600px;
+    background-color: white;
+    z-index: 3;
+    right: 50.3px;
+    box-shadow: 0px 5px 10px 11px rgba(34, 60, 80, 0.2) inset;
+    animation: myAnim 1s ease 0s 1 normal forwards;
+}
+
+.catalog-movies-list .anticon{
+    color: red;
+    cursor: pointer;
+}
+.catalog-li{
+    text-align: center;
+    width: 100px;
+    height: 30px;
+    list-style: none;
+    margin-top: 10px;
+    border: 1px black solid;
+    border-radius: 20%;
+    cursor: pointer;
+}
+.catalog-li:hover{
+    background-color: aqua;
+}
+.cart-clear-button{
+    padding: 2px;
+    border: none;
+    background-color: #ffdd2d;
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    align-self: center;
+    cursor: pointer;
+    margin-left: 100px;
+}
