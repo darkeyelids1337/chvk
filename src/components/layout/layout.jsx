@@ -4,11 +4,11 @@ import Header from "../header";
 import FilmList from "../film-list";
 import MovieInfo from "../movie-info";
 import { useEffect, useState } from "react";
-const Layout = ({data, changeTerm, isCritic, cart, setCart}) => {
+const Layout = ({data, changeTerm, isCritic, cart, setCart, catalogData, setCatalogData}) => {
   const [movieInfo, setMovieInfo] = useState();
   return (
     <>
-      <Header changeTerm={changeTerm} cart={cart} setCart={setCart}></Header>
+      <Header changeTerm={changeTerm} cart={cart} setCart={setCart} catalogData={catalogData} setCatalogData={setCatalogData}></Header>
       <div className="main-page">
         <FilmList data = {data} setMovieInfo = {setMovieInfo}></FilmList>
         {movieInfo ? <MovieInfo props = {movieInfo} isCritic={isCritic} setCart={setCart} cart={cart}></MovieInfo> : null}

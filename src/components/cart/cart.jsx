@@ -1,6 +1,6 @@
 import "./cart.css";
 import { CloseOutlined } from "@ant-design/icons";
-const Cart = ({ cart, isCartActive, setCartActive, setCart }) => {
+const Cart = ({ cart, isCartActive, setCartActive, setCart, catalogData, setCatalogData}) => {
   const oldCart = cart;
   console.log(oldCart);
   return (
@@ -47,6 +47,7 @@ const Cart = ({ cart, isCartActive, setCartActive, setCart }) => {
       <button
         className="cart-buy-button"
         onClick={() => {
+          setCatalogData([...catalogData, ...cart]);
           setCartActive(!isCartActive);
           setCart([]);
         }}
