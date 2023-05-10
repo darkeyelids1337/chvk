@@ -1,16 +1,74 @@
 import "./header.css";
 import { Input } from "antd";
-import { ShoppingCartOutlined, PlaySquareOutlined, CloseOutlined } from "@ant-design/icons";
+import {
+  ShoppingCartOutlined,
+  PlaySquareOutlined,
+  CloseOutlined,
+} from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import Cart from "../cart";
 import Catalog from "../catalog";
 const { Search } = Input;
-const Header = ({ changeTerm, cart, setCart, catalogData, setCatalogData}) => {
+const Header = ({
+  changeTerm,
+  cart,
+  setCart,
+  catalogData,
+  setCatalogData,
+  userInfo,
+  setUserInfo,
+}) => {
   const onSearch = (value) => changeTerm(value.toLowerCase());
   const [isCartActive, setCartActive] = useState(false);
-  const [balance, setBalance] = useState(107);
+  const [balance, setBalance] = useState(null);
   const [balanceForm, setBalanceForm] = useState(false);
   const [isCatalogActive, setCatalogActive] = useState(false);
+
+  useEffect(() => {
+    if (userInfo) {
+      fetch("http://127.0.0.1:7000/backend/topupbalance/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          'payment': 0,
+          'access_token': userInfo.access_token,
+          'id': userInfo.id,
+        }),
+      })
+        .then((res) => 
+        {
+          if (res.status === 200) {
+            return res.json();
+          } else {
+            fetch("http://127.0.0.1:7000/backend/refresh/", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                'id': userInfo.id,
+               'refresh_token': userInfo.refresh_token,
+              }),
+            })
+              .then((res) => {
+                if (res.status === 200) {
+                  return res.json();
+                } else {
+                  console.log(userInfo.refresh_token);
+                }
+              })
+              .then((res) => {
+                console.log('posle refresh', res);
+                localStorage.setItem('user', JSON.stringify(res));
+                setUserInfo(res)
+              });
+          }
+        })
+        .then((res) => res ? setBalance(+res.user.balance) : null);
+    }
+  }, [setUserInfo, userInfo]);
   useEffect(() => {
     if (balanceForm) {
       document
@@ -18,12 +76,21 @@ const Header = ({ changeTerm, cart, setCart, catalogData, setCatalogData}) => {
         .classList.toggle("visually-hidden");
     }
   }, [balanceForm]);
+  // useEffect(() => {
+  //   if (userInfo) {
+  //     console.log(userInfo.refresh_token);
+  //     setBalance(userInfo.user.balance);
+  //   }
+  // }, [userInfo]);
   const BalanceForm = () => {
     return (
       <div className="balance-form visually-hidden">
-        <div className="close-icon" onClick={() => setBalanceForm(!balanceForm)}>
-            <CloseOutlined />
-          </div>
+        <div
+          className="close-icon"
+          onClick={() => setBalanceForm(!balanceForm)}
+        >
+          <CloseOutlined />
+        </div>
         <h3>Пожалуйста введите насколько вы хотите пополнить</h3>
         <input type="number"></input>
         <button
@@ -31,9 +98,52 @@ const Header = ({ changeTerm, cart, setCart, catalogData, setCatalogData}) => {
             const balanceValue = e.target.parentElement.querySelector(
               'input[type="number"]'
             ).value;
+            const balanceBody = {
+              'payment': +balanceValue,
+              'access_token': userInfo.access_token,
+              'id': userInfo.id,
+            };
             if (balanceValue) {
               setBalanceForm(!balanceForm);
-              setBalance(balance + +balanceValue);
+              fetch("http://127.0.0.1:7000/backend/topupbalance/", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(balanceBody),
+              })
+                .then((res) => {
+                  if (res.status === 200) {
+                    return res.json();
+                  } else
+                    fetch("http://127.0.0.1:7000/backend/refresh/", {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({
+                        'id': userInfo.id,
+                        'refresh_token': userInfo.refresh_token,
+                      }),
+                    })
+                      .then((res) => {
+                        if (res.status === 200) {
+                          return res.json();
+                        } else {
+                          console.log('refresh', userInfo.access_token);
+                        }
+                      })
+                      .then((res) => {
+                        localStorage.setItem('user', JSON.stringify(res));
+                        setUserInfo(res);
+                      });
+                })
+                .then((res) => {
+                  // console.log(typeof +balance);
+                  // console.log(+balance)
+                  setBalance(+res.user.balance);
+                });
+              // setBalance(balance + +balanceValue);
             } else alert("Please enter a number");
           }}
         >
@@ -79,8 +189,11 @@ const Header = ({ changeTerm, cart, setCart, catalogData, setCatalogData}) => {
           setCart={setCart}
           isCartActive={isCartActive}
           setCartActive={setCartActive}
-          catalogData ={catalogData}
+          catalogData={catalogData}
           setCatalogData={setCatalogData}
+          userInfo={userInfo}
+          setUserInfo={setUserInfo}
+          setBalance={setBalance}
         ></Cart>
       ) : null}
       {isCatalogActive ? (
@@ -89,6 +202,8 @@ const Header = ({ changeTerm, cart, setCart, catalogData, setCatalogData}) => {
           setCatalogActive={setCatalogActive}
           catalogData={catalogData}
           setCatalogData={setCatalogData}
+          userInfo={userInfo}
+          setUserInfo={setUserInfo}
         ></Catalog>
       ) : null}
     </>
