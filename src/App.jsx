@@ -9,148 +9,79 @@ const App = () => {
   const navigate = useNavigate();
   const [login, setLogin] = useState(false);
   const [isCritic, setIsCritic] = useState(true);
+  const [userInfo, setUserInfo] = useState();
   const [term, changeTerm] = useState("");
-  const [data, setData] = useState([
-    {
-      id: 1,
-      title: "Andy",
-      year: 2022,
-      genres: ["Crime", "Drama"],
-      director: "Korobkin",
-      actors: "Jim Carry, Sobaka Sharik, Barak Obama",
-      plot: "Лютый трешак просто ппц",
-      posterUrl:
-        "https://sun9-24.userapi.com/impg/UgyghmKx2mPKKmJW0-FaMZ2Kv_Av64XeuCS6sw/9YLFeQwqQcw.jpg?size=828x817&quality=95&sign=cf11be4c7cd01483aca1d656780b1ffb&type=album",
-      reviews: [
-        {
-          author: "Vlad",
-          review: "Жесть",
-        },
-        {
-          author: "Artem",
-          review:
-            "А мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилосьА мне понравилось",
-        },
-      ],
-    },
-    {
-      id: 2,
-      title: "Andy 2",
-      year: 2023,
-      genres: ["Crime", "Drama"],
-      director: "Korobkin",
-      actors: "Jim Carry, Sobaka Sharik, Barak Obama",
-      plot: "Лютый трешак просто ппц",
-      posterUrl: "",
-      reviews: [
-        {
-          author: "Vlad",
-          review: "Жесть",
-        },
-        {
-          author: "Artem",
-          review: "А мне понравилось",
-        },
-      ],
-    },
-    {
-      id: 3,
-      title: "Andy 3",
-      year: 2023,
-      genres: ["Crime", "Drama"],
-      actors: "Jim Carry, Sobaka Sharik, Barak Obama",
-      plot: "Лютый трешак просто ппц",
-      director: "Korobkin",
-      posterUrl:
-        "https://images-na.ssl-images-amazon.com/images/M/MV5BMjA4ODQ3ODkzNV5BMl5BanBnXkFtZTYwOTc4NDI3._V1_SX300.jpg",
-      reviews: [
-        {
-          author: "Vlad",
-          review: "Жесть",
-        },
-        {
-          author: "Artem",
-          review: "А мне понравилось",
-        },
-      ],
-    },
-    {
-      id: 4,
-      title: "Andy 4",
-      year: 2023,
-      genres: ["Crime", "Drama"],
-      actors: "Jim Carry, Sobaka Sharik, Barak Obama",
-      director: "Korobkin",
-      plot: "Лютый трешак просто ппц",
-      posterUrl:
-        "https://images-na.ssl-images-amazon.com/images/M/MV5BMjA4ODQ3ODkzNV5BMl5BanBnXkFtZTYwOTc4NDI3._V1_SX300.jpg",
-      reviews: [
-        {
-          author: "Vlad",
-          review: "Жесть",
-        },
-        {
-          author: "Artem",
-          review: "А мне понравилось",
-        },
-      ],
-    },
-    {
-      id: 5,
-      title: "Andy 5",
-      year: 2023,
-      genres: ["Crime", "Drama"],
-      actors: "Jim Carry, Sobaka Sharik, Barak Obama",
-      director: "Korobkin",
-      plot: "Лютый трешак просто ппц",
-      posterUrl:
-        "https://images-na.ssl-images-amazon.com/images/M/MV5BMjA4ODQ3ODkzNV5BMl5BanBnXkFtZTYwOTc4NDI3._V1_SX300.jpg",
-      reviews: [
-        {
-          author: "Vlad",
-          review: "Жесть",
-        },
-        {
-          author: "Artem",
-          review: "А мне понравилось",
-        },
-      ],
-    },
-    {
-      id: 6,
-      title: "Scream",
-      year: 2023,
-      genres: ["Crime", "Drama"],
-      actors: "Jim Carry, Sobaka Sharik, Barak Obama",
-      director: "Korobkin",
-      plot: "Лютый трешак просто ппц",
-      posterUrl:
-        "https://images-na.ssl-images-amazon.com/images/M/MV5BMjA4ODQ3ODkzNV5BMl5BanBnXkFtZTYwOTc4NDI3._V1_SX300.jpg",
-      reviews: [
-        {
-          author: "Vlad",
-          review: "Жесть",
-        },
-        {
-          author: "Artem",
-          review: "А мне понравилось",
-        },
-      ],
-    },
-  ]);
-  const [cart, setCart] = useState([]);
-  const [catalogData, setCatalogData] = useState([]);
+  const [data, setData] = useState([]);
   useEffect(() => {
-    const userInfo = localStorage.getItem("user");
-    if (userInfo) {
+    fetch("http://127.0.0.1:7000/backend/getmovies/")
+      .then((res) => res.json())
+      .then((jsonData) => {
+        setData(
+          Object.keys(jsonData).map((key) => {
+            return jsonData[key];
+          })
+        );
+      });
+      
+
+  }, []);
+  const [cart, setCart] = useState([]);
+  const [catalogData, setCatalogData] = useState([0]);
+  useEffect(() => {
+    const userActive = localStorage.getItem("user");
+    if (userActive) {
       setLogin(true);
+      setUserInfo(JSON.parse(userActive));
     }
   }, []);
   useEffect(() => {
     if (!login) {
       return navigate("/login");
-    } else return navigate("/");
+    } else {
+      return navigate("/");
+    }
   }, [login]);
+  useEffect(() => {
+    if (userInfo) {
+      fetch("http://127.0.0.1:7000/backend/bought/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: userInfo.id,
+          access_token: userInfo.access_token,
+        }),
+      })
+        .then((res) => {
+          if (res.status === 200) {
+            return res.json();
+          } else {
+            fetch("http://127.0.0.1:7000/backend/refresh/", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                id: userInfo.id,
+                refresh_token: userInfo.refresh_token,
+              }),
+            })
+              .then((res) => res.json())
+              .then((res) => {
+                localStorage.setItem("user", JSON.stringify(res));
+                setUserInfo(res);
+              });
+          }
+        })
+        .then((res) => {
+          console.log("res", res);
+          if(Object.keys(res).length !== 0){
+            setCatalogData([res]);
+          }
+        });
+    }
+  },[userInfo, setUserInfo]);
   function searchPost(data, term) {
     if (data.length === 1 || !data) {
       return;
@@ -164,6 +95,7 @@ const App = () => {
     });
   }
   const visible = searchPost(data, term);
+  console.log(catalogData);
   return (
     <>
       <Routes>
@@ -178,12 +110,19 @@ const App = () => {
               setCart={setCart}
               catalogData={catalogData}
               setCatalogData={setCatalogData}
+              userInfo={userInfo}
+              setUserInfo={setUserInfo}
             ></Layout>
           }
         ></Route>
         <Route
           path="/login"
-          element={<LoginPage setLogin={setLogin}></LoginPage>}
+          element={
+            <LoginPage
+              setLogin={setLogin}
+              setUserInfo={setUserInfo}
+            ></LoginPage>
+          }
         ></Route>
         <Route
           path="/signup"
@@ -196,7 +135,3 @@ const App = () => {
 };
 
 export default App;
-
-
-
-
